@@ -4,6 +4,9 @@ function AddPostForm({ onAddPost }) {
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
 
+  const maxLength = 100;
+  const remaining = maxLength - title.length;
+
   function handleSubmit(e) {
     e.preventDefault();
     if (!title.trim() || !body.trim()) return; // ป้องกันส่งว่าง
@@ -32,6 +35,7 @@ function AddPostForm({ onAddPost }) {
         type="text"
         placeholder="หัวข้อโพสต์"
         value={title}
+        maxLength={maxLength}
         onChange={(e) => setTitle(e.target.value)}
         style={{
           width: "100%",
@@ -43,6 +47,17 @@ function AddPostForm({ onAddPost }) {
           boxSizing: "border-box",
         }}
       />
+
+      <div
+        style={{
+          textAlign: "right",
+          fontSize: "0.85rem",
+          color: remaining < 10 ? "red" : "#4a5568",
+          marginBottom: "0.5rem",
+        }}
+      >
+        {title.length}/{maxLength}
+      </div>
 
       <textarea
         placeholder="เนื้อหาโพสต์"
