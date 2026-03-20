@@ -8,6 +8,7 @@ function PostList({ favorites, onToggleFavorite }) {
   const [error, setError] = useState(null);
   const [search, setSearch] = useState("");
 
+  // 🔥 แยก logic fetch ออกมา
   async function fetchPosts() {
     try {
       setLoading(true);
@@ -25,6 +26,7 @@ function PostList({ favorites, onToggleFavorite }) {
     }
   }
 
+  // โหลดครั้งแรก
   useEffect(() => {
     fetchPosts();
   }, []);
@@ -52,35 +54,39 @@ function PostList({ favorites, onToggleFavorite }) {
 
   return (
     <div>
-      {/* หัวข้อ + ปุ่มโหลดใหม่ */}
+      {/* 🔥 Header + ปุ่มโหลดใหม่ */}
       <div
         style={{
           display: "flex",
           justifyContent: "space-between",
           alignItems: "center",
-          borderBottom: "2px solid #1e40af",
-          paddingBottom: "0.5rem",
-          marginBottom: "1rem",
         }}
       >
-        <h2 style={{ color: "#2d3748", margin: 0 }}>โพสต์ล่าสุด</h2>
+        <h2
+          style={{
+            color: "#2d3748",
+            borderBottom: "2px solid #1e40af",
+            paddingBottom: "0.5rem",
+          }}
+        >
+          โพสต์ล่าสุด
+        </h2>
 
         <button
           onClick={fetchPosts}
           style={{
-            padding: "0.35rem 0.75rem",
+            padding: "0.4rem 0.8rem",
             borderRadius: "6px",
-            border: "1px solid #cbd5e0",
-            background: "#edf2f7",
+            border: "none",
+            background: "#1e40af",
+            color: "white",
             cursor: "pointer",
-            fontSize: "0.9rem",
           }}
         >
           🔄 โหลดใหม่
         </button>
       </div>
 
-      {/* ช่องค้นหา */}
       <input
         type="text"
         placeholder="ค้นหาโพสต์..."
@@ -97,21 +103,14 @@ function PostList({ favorites, onToggleFavorite }) {
         }}
       />
 
-      {/* กรณีไม่พบ */}
       {filtered.length === 0 && (
         <p style={{ color: "#718096", textAlign: "center", padding: "2rem" }}>
           ไม่พบโพสต์ที่ค้นหา
         </p>
       )}
 
-      {/* แสดงโพสต์ */}
       {filtered.map((post) => (
-        <PostCard
-          key={post.id}
-          post={post}
-          isFavorite={favorites.includes(post.id)}
-          onToggleFavorite={() => onToggleFavorite(post.id)}
-        />
+        <PostCard key={post.id} post={post} />
       ))}
     </div>
   );
