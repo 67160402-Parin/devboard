@@ -1,13 +1,15 @@
-import { useState } from "react";
+import { useState } from "react"; // นำเข้า useState จาก React เพื่อจัดการ state
 
 function AddPostForm({ onAddPost }) {
-  const [title, setTitle] = useState("");
-  const [body, setBody] = useState("");
+  // รับ prop onAddPost ซึ่งเป็นฟังก์ชันที่ใช้เพิ่มโพสต์ใหม่
+  const [title, setTitle] = useState(""); // สร้าง state สำหรับเก็บค่าหัวข้อ
+  const [body, setBody] = useState(""); // สร้าง state สำหรับเก็บค่าเนื้อหา
 
   const maxLength = 100;
   const remaining = maxLength - title.length;
 
   function handleSubmit(e) {
+    // ฟังก์ชันที่ถูกเรียกเมื่อฟอร์มถูก submit
     e.preventDefault();
     if (!title.trim() || !body.trim()) return;
 
@@ -17,7 +19,7 @@ function AddPostForm({ onAddPost }) {
   }
 
   return (
-    <form
+    <form // ฟอร์มสำหรับเพิ่มโพสต์ใหม่
       onSubmit={handleSubmit}
       style={{
         border: "1px solid #e2e8f0",

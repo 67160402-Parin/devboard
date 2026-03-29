@@ -4,12 +4,13 @@ import { useFavorites } from "../context/FavoritesContext";
 import CommentList from "./CommentList";
 
 function PostCard({ post }) {
+  // รับ prop post ซึ่งเป็นข้อมูลโพสต์ที่จะแสดง
   const { favorites, toggleFavorite } = useFavorites();
   const isFavorite = favorites.includes(post.id);
   const [showComments, setShowComments] = useState(false);
 
   return (
-    <div
+    <div // การ์ดที่แสดงโพสต์แต่ละโพสต์
       style={{
         border: "1px solid #e2e8f0",
         borderRadius: "8px",
@@ -31,7 +32,7 @@ function PostCard({ post }) {
       </p>
 
       <div style={{ display: "flex", gap: "0.5rem" }}>
-        <button
+        <button // ปุ่มสำหรับเพิ่ม/ลบจากรายการโปรด
           onClick={() => toggleFavorite(post.id)}
           style={{
             background: "none",
@@ -44,7 +45,7 @@ function PostCard({ post }) {
           {isFavorite ? "❤️" : "🤍"}
         </button>
 
-        <button
+        <button // ปุ่มสำหรับแสดง/ซ่อนความคิดเห็น
           onClick={() => setShowComments((prev) => !prev)}
           style={{
             background: "none",

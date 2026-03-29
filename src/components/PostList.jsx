@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
-import PostCard from "./PostCard";
-import LoadingSpinner from "./LoadingSpinner";
+import PostCard from "./PostCard"; // นำเข้า PostCard เพื่อแสดงข้อมูลโพสต์แต่ละโพสต์
+import LoadingSpinner from "./LoadingSpinner"; // นำเข้า LoadingSpinner เพื่อแสดงสถานะการโหลดข้อมูล
 
 function PostList({ favorites, onToggleFavorite }) {
   const [posts, setPosts] = useState([]);
@@ -31,11 +31,13 @@ function PostList({ favorites, onToggleFavorite }) {
     fetchPosts();
   }, []);
 
-  const filtered = posts.filter((post) =>
-    post.title.toLowerCase().includes(search.toLowerCase()),
+  const filtered = posts.filter(
+    (
+      post, // กรองโพสต์ตามคำค้นหา
+    ) => post.title.toLowerCase().includes(search.toLowerCase()),
   );
 
-  if (loading) return <LoadingSpinner />;
+  if (loading) return <LoadingSpinner />; // แสดง loading spinner ขณะรอข้อมูล
 
   if (error)
     return (
@@ -103,7 +105,7 @@ function PostList({ favorites, onToggleFavorite }) {
         }}
       />
 
-      {filtered.length === 0 && (
+      {filtered.length === 0 && ( // แสดงข้อความเมื่อไม่พบโพสต์ที่ค้นหา
         <p style={{ color: "#718096", textAlign: "center", padding: "2rem" }}>
           ไม่พบโพสต์ที่ค้นหา
         </p>

@@ -1,11 +1,11 @@
-import { useState, useEffect } from "react";
-import UserCard from "./UserCard";
+import { useState, useEffect } from "react"; // นำเข้า useState และ useEffect จาก React เพื่อจัดการ state และ effects
+import UserCard from "./UserCard"; // นำเข้า UserCard component เพื่อแสดงข้อมูลผู้ใช้
 import LoadingSpinner from "./LoadingSpinner";
 
 function UserList() {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
-
+  // useEffect จะทำงานเมื่อ component ถูก mount ขึ้นมา และจะทำการ fetch ข้อมูลจาก API
   useEffect(() => {
     async function fetchUsers() {
       try {
@@ -21,9 +21,10 @@ function UserList() {
     fetchUsers();
   }, []);
 
-  if (loading) return <LoadingSpinner />;
+  if (loading) return <LoadingSpinner />; // แสดง loading spinner ขณะรอข้อมูล
 
   return (
+    // แสดงรายชื่อผู้ใช้เมื่อโหลดข้อมูลเสร็จแล้ว
     <div>
       <h2
         style={{

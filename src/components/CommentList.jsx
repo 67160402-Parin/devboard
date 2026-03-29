@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import LoadingSpinner from "./LoadingSpinner";
 
 function CommentList({ postId }) {
+  // รับ prop postId เพื่อใช้ดึงความคิดเห็นของโพสต์นั้นๆ
   const [comments, setComments] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
