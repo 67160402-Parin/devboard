@@ -32,8 +32,7 @@ function AddPostForm({ onAddPost }) {
       <h3 style={{ margin: "0 0 0.75rem", color: "#2d3748" }}>
         เพิ่มโพสต์ใหม่
       </h3>
-
-      {/* input + counter */}
+      {/* input + counter */} // ช่องกรอกหัวข้อพร้อมตัวนับจำนวนตัวอักษรที่เหลือ
       <div style={{ marginBottom: "0.5rem" }}>
         <input
           type="text"
@@ -50,8 +49,7 @@ function AddPostForm({ onAddPost }) {
             boxSizing: "border-box",
           }}
         />
-
-        {/* Character Counter */}
+        {/* Character Counter */} // แสดงจำนวนตัวอักษรที่เหลือ
         <div
           style={{
             textAlign: "right",
@@ -63,7 +61,6 @@ function AddPostForm({ onAddPost }) {
           {title.length}/{maxLength}
         </div>
       </div>
-
       <textarea
         placeholder="เนื้อหาโพสต์"
         value={body}
@@ -80,7 +77,6 @@ function AddPostForm({ onAddPost }) {
           boxSizing: "border-box",
         }}
       />
-
       <button
         type="submit"
         style={{
