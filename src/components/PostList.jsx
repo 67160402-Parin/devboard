@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
-import PostCard from "./PostCard"; // นำเข้า PostCard เพื่อแสดงข้อมูลโพสต์แต่ละโพสต์
-import LoadingSpinner from "./LoadingSpinner"; // นำเข้า LoadingSpinner เพื่อแสดงสถานะการโหลดข้อมูล
+import PostCard from "./PostCard";
+import PostCount from "./PostCount";
+import LoadingSpinner from "./LoadingSpinner";
 
 function PostList({ favorites, onToggleFavorite }) {
   const [posts, setPosts] = useState([]);
@@ -13,7 +14,6 @@ function PostList({ favorites, onToggleFavorite }) {
     try {
       setLoading(true);
       setError(null);
-
       const res = await fetch("https://jsonplaceholder.typicode.com/posts");
       if (!res.ok) throw new Error("ดึงข้อมูลไม่สำเร็จ");
 
@@ -31,13 +31,11 @@ function PostList({ favorites, onToggleFavorite }) {
     fetchPosts();
   }, []);
 
-  const filtered = posts.filter(
-    (
-      post, // กรองโพสต์ตามคำค้นหา
-    ) => post.title.toLowerCase().includes(search.toLowerCase()),
+  const filtered = posts.filter((post) =>
+    post.title.toLowerCase().includes(search.toLowerCase()),
   );
 
-  if (loading) return <LoadingSpinner />; // แสดง loading spinner ขณะรอข้อมูล
+  if (loading) return <LoadingSpinner />;
 
   if (error)
     return (
@@ -73,7 +71,6 @@ function PostList({ favorites, onToggleFavorite }) {
         >
           โพสต์ล่าสุด
         </h2>
-
         <button
           onClick={fetchPosts}
           style={{
@@ -88,6 +85,8 @@ function PostList({ favorites, onToggleFavorite }) {
           🔄 โหลดใหม่
         </button>
       </div>
+      {/* แสดงจำนวนโพสต์ทั้งหมด */}
+      <PostCount count={posts.length} />
 
       <input
         type="text"
@@ -105,7 +104,7 @@ function PostList({ favorites, onToggleFavorite }) {
         }}
       />
 
-      {filtered.length === 0 && ( // แสดงข้อความเมื่อไม่พบโพสต์ที่ค้นหา
+      {filtered.length === 0 && (
         <p style={{ color: "#718096", textAlign: "center", padding: "2rem" }}>
           ไม่พบโพสต์ที่ค้นหา
         </p>
