@@ -92,7 +92,9 @@ function PostList({ favorites, onToggleFavorite }) {
         type="text"
         placeholder="ค้นหาโพสต์..."
         value={search}
-        onChange={(e) => setSearch(e.target.value)}
+        onChange={(e) => {
+          setSearch(e.target.value);
+        }}
         style={{
           width: "100%",
           padding: "0.5rem 0.75rem",
@@ -105,7 +107,13 @@ function PostList({ favorites, onToggleFavorite }) {
       />
 
       {filtered.length === 0 && (
-        <p style={{ color: "#718096", textAlign: "center", padding: "2rem" }}>
+        <p
+          style={{
+            color: "#718096",
+            textAlign: "center",
+            padding: "2rem",
+          }}
+        >
           ไม่พบโพสต์ที่ค้นหา
         </p>
       )}
